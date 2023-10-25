@@ -2,10 +2,13 @@
 
 Java-11
 #### Библиотеки: ####
-- Maven-version_4.0.0-blue
+- Maven-version_3.8.1
 
-- Jacoco-version_0.8.7-blue
+- Jacoco-version_0.8.7
 
-- Mockito-version_3.12.4-blue
+- Mockito-version_5.2.0
 
-- JUnit_4-version_4.13.2-blue
+- JUnit_4-version_4.13.2
+
+#### Команда для запуска тестов: ####
+- mvn clean test
