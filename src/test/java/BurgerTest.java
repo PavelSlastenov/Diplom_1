@@ -2,9 +2,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import praktikum.Bun;
 import praktikum.Burger;
 import praktikum.Ingredient;
@@ -13,7 +11,8 @@ import praktikum.IngredientType;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static praktikum.Constants.PRICE_OF_THE_BERGER_DELTA;
 
 /**
  * Тесты для класса /src/main/java/Burger.
@@ -29,7 +28,6 @@ public class BurgerTest {
     @Mock
     private Ingredient oneMoreIngredient;
 
-    @Spy
     private Burger burger;
 
     @Before
@@ -43,12 +41,13 @@ public class BurgerTest {
         when(oneMoreIngredient.getPrice()).thenReturn(0.15f);
         when(oneMoreIngredient.getName()).thenReturn("cutlet");
         when(oneMoreIngredient.getType()).thenReturn(IngredientType.FILLING);
+
+        burger = new Burger();
     }
 
     @Test
     public void setBunsCallSetBunsIsCalled() {
         burger.setBuns(bun);
-        Mockito.verify(burger, Mockito.times(1)).setBuns(bun);
         assertNotNull(burger.bun);
     }
 
@@ -70,14 +69,14 @@ public class BurgerTest {
         burger.ingredients.addAll(List.of(ingredient, oneMoreIngredient));
         burger.moveIngredient(1, 0);
         burger.ingredients.get(1).getName();
-        Mockito.verify(ingredient).getName();
+        verify(ingredient).getName();
     }
 
     @Test
     public void getPriceReturnedPriceOfTheBurger() {
         burger.setBuns(bun);
         burger.ingredients.addAll(List.of(ingredient, oneMoreIngredient));
-        assertEquals(0.8, burger.getPrice(), 0.01);
+        assertEquals(0.8, burger.getPrice(), PRICE_OF_THE_BERGER_DELTA);
     }
 
     @Test
